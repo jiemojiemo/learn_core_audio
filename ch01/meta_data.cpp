@@ -13,7 +13,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     if(argc < 2){
-        cerr << "Usage: ch01_main /full/path/to/audiofile\n";
+        cerr << "Usage: meta_data /full/path/to/audiofile\n";
         return -1;
     }
 

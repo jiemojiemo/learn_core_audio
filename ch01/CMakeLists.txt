@@ -1,2 +1,2 @@
-add_executable(ch01_main ch01_main.cpp)
-target_link_libraries(ch01_main PUBLIC ${LINK_LIBS})
+add_executable(meta_data meta_data.cpp)
+target_link_libraries(meta_data PUBLIC ${LINK_LIBS})
