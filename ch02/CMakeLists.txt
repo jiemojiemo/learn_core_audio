@@ -1,0 +1,2 @@
+add_executable(tone_file_generator tone_file_generator.cpp)
+target_link_libraries(tone_file_generator ${LINK_LIBS})
