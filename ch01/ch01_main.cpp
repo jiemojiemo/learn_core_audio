@@ -3,16 +3,12 @@
 // Created by William.Hua on 2020/9/28.
 //
 
+#include "scope_guard.h"
 #include <iostream>
 #include <string>
 #include <AudioToolbox/AudioFile.h>
 
 using namespace std;
-
-static void printKeys (const void* key, const void* value, void* context) {
-    CFShow(key);
-    CFShow(value);
-}
 
 int main(int argc, char* argv[])
 {
@@ -22,8 +18,16 @@ int main(int argc, char* argv[])
     }
 
     AudioFileID audio_file;
+    ON_SCOPE_EXIT([audio_file]{
+        if(audio_file != NULL)
+            AudioFileClose(audio_file);
+    });
+
     CFStringRef audio_url_str = CFStringCreateWithCString(kCFAllocatorDefault, argv[1], kCFStringEncodingUTF8);
+    ON_SCOPE_EXIT([audio_url_str](){ CFRelease(audio_url_str); });
+
     CFURLRef audio_url = CFURLCreateWithString(kCFAllocatorDefault, audio_url_str, NULL);
+    ON_SCOPE_EXIT([audio_url](){CFRelease(audio_url);});
 
     auto err = AudioFileOpenURL(audio_url, kAudioFileReadPermission, 0, &audio_file);
     assert(err == noErr);
@@ -37,6 +41,7 @@ int main(int argc, char* argv[])
     assert(err == noErr);
 
     CFShow(dictionary);
+    CFRelease(dictionary);
 
     return 0;
 }
