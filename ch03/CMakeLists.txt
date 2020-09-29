@@ -1,0 +1,2 @@
+add_executable(stream_format_tester stream_format_tester.cpp)
+target_link_libraries(stream_format_tester ${LINK_LIBS})
