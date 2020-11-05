@@ -4,6 +4,7 @@
 //
 
 #include "scope_guard.h"
+#include "tool_function.h"
 #include <iostream>
 #include <string>
 #include <AudioToolbox/AudioFile.h>
@@ -23,10 +24,7 @@ int main(int argc, char* argv[])
             AudioFileClose(audio_file);
     });
 
-    CFStringRef audio_url_str = CFStringCreateWithCString(kCFAllocatorDefault, argv[1], kCFStringEncodingUTF8);
-    ON_SCOPE_EXIT([audio_url_str](){ CFRelease(audio_url_str); });
-
-    CFURLRef audio_url = CFURLCreateWithString(kCFAllocatorDefault, audio_url_str, NULL);
+    CFURLRef audio_url = createCFURLWithStdString(string(argv[1]));
     ON_SCOPE_EXIT([audio_url](){CFRelease(audio_url);});
 
     auto err = AudioFileOpenURL(audio_url, kAudioFileReadPermission, 0, &audio_file);
