@@ -9,8 +9,8 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     AudioFileTypeAndFormatID  file_type_and_format_id;
-    file_type_and_format_id.mFileType = kAudioFileAIFFType;
-    file_type_and_format_id.mFormatID = kAudioFormatLinearPCM;
+    file_type_and_format_id.mFileType = kAudioFileCAFType;
+    file_type_and_format_id.mFormatID = kAudioFormatMPEG4AAC;
 
     OSStatus err = noErr;
     UInt32 info_size = 0;
