@@ -6,6 +6,7 @@
 #ifndef LEARN_CORE_AUDIO_INCLUDE_TOOL_FUNCTION_H
 #define LEARN_CORE_AUDIO_INCLUDE_TOOL_FUNCTION_H
 
+#include "scope_guard.h"
 #include <AudioToolbox/AudioToolbox.h>
 #include <string>
 
