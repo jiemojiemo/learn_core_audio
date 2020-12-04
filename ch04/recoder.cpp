@@ -2,7 +2,7 @@
 //
 // Created by William.Hua on 2020/12/3.
 //
-
+#include "tool_function.h"
 #include <AudioToolbox/AudioToolbox.h>
 
 const int kNumberRecordBuffers = 3;
@@ -13,25 +13,6 @@ struct MyRecoder {
     Boolean      running;
 };
 
-static void checkError(OSStatus error, const char* operation)
-{
-    if(error == noErr)
-        return;
-
-    char error_str[20];
-    *(UInt32 *)(error_str + 1) = CFSwapInt32HostToBig(error);
-    if(isprint(error_str[1] && isprint(error_str[2])
-       && isprint(error_str[3]) && isprint(error_str[4]))){
-        error_str[0] = error_str[5] = '\'';
-        error_str[6] = '\0';
-    }else{
-        sprintf(error_str, "%d", (int)(error));
-    }
-
-    fprintf(stderr, "Error: %s (%s)\n", operation, error_str);
-    exit(1);
-
-}
 
 static void MyAQInputCallback(
     void * __nullable               inUserData,
